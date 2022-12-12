@@ -1,3 +1,7 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable no-unused-vars */
+/* eslint-disable import/no-mutable-exports */
+
 import './style.css'
 
 const myTodo = [
