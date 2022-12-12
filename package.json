@@ -9,7 +9,7 @@
     "start": "webpack serve --open",
     "build": "webpack",
     "deploy": "gh-pages -d dist"
-  },  
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mekuseo/Todo-List-Project.git"
