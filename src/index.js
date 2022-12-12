@@ -11,7 +11,7 @@ const myTodo = [
   {description: 'Take out the trash', completed: false, index: 3}
 ]
 
-const todos = document.querySelector('.todos');
+let todos = document.querySelector('.todos');
 
 const todoList = myTodo.map((todo) => {
   return `<li class="todo-item">
@@ -21,4 +21,3 @@ const todoList = myTodo.map((todo) => {
 }).join('')
 
 todos.innerHTML = todoList
-todos.appendChild(todoList);
