@@ -1,0 +1,22 @@
+body {
+  background-color: aqua;
+}
+
+h1 {
+  color: Gold;
+  margin: 20px 60px;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  color: white;
+  padding: 10px 60px;
+}
+
