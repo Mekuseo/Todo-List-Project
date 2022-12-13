@@ -3,13 +3,7 @@
 /* eslint-disable import/no-mutable-exports */
 
 import './style.css';
-
-const myTodo = [
-  { description: 'Wash the dishes', completed: false, index: 0 },
-  { description: 'Clean the room', completed: false, index: 1 },
-  { description: 'Do the laundry', completed: false, index: 2 },
-  { description: 'Take out the trash', completed: false, index: 3 },
-];
+import myTodo from './modules/functionality.js';
 
 const todos = document.querySelector('.todos');
 
