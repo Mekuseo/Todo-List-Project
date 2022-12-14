@@ -71,7 +71,7 @@ export default function addEditRemoveTask() {
   });
 
   // Error message for no task input
-   if (task === '') {
+  if (task === '') {
     taskContainer.remove();
     const error = document.createElement('div');
     error.classList.add('error');
