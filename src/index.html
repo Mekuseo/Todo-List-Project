@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Todo List Project</title>
-</head>
-<body>
-  <h1 class="header">Todo List</h1>
-  
-  <ul class="todos"></ul>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo List Project</title>
+  </head>
+  <body>
+    <header>
+      <h1>Your Todo Task 2021</h1>
+      <form id="new-task-form">
+        <input
+          type="text"
+          name="new-task-input"
+          id="new-task-input"
+          placeholder="What do you have planned?"
+        />
+        <input type="submit" id="new-task-submit" value="Add task" />
+      </form>
+      <div class="error-message"></div>
+    </header>
+    <main>
+      <section class="task-list">
+        <h2>Tasks</h2>
+
+        <div id="tasks"></div>
+        <hr>
+        <input type="submit" id="new-task-submit" value="Delete All task" class="delete-all"/>
+      </section>
+    </main>
+  </body>
 </html>
