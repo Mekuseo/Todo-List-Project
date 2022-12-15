@@ -1,5 +1,7 @@
 /* eslint-disable array-callback-return */
 
+import { removeAllTodo, deleteAllList } from './interactive.js';
+
 const input = document.querySelector('#new-task-input');
 const listContainer = document.querySelector('#tasks');
 const errorMessage = document.querySelector('.error-message');
@@ -86,14 +88,19 @@ export default function addEditRemoveTask(task) {
   });
 
   // delete all tasks from the list
-  const deleteAllButton = document.querySelector('.delete-all');
-  deleteAllButton.addEventListener('click', () => {
-    listContainer.innerHTML = '';
-  });
+  deleteAllList();
 
   // Remove all todo items from the list in local storage
-  deleteAllButton.addEventListener('click', () => {
-    localStorage.clear();
+  removeAllTodo();
+
+  // function for updating items object's value for completed
+  taskCheckboxContainer.addEventListener('change', () => {
+    if (taskCheckboxContainer.checked === true) {
+      task.completed = true;
+    } else {
+      task.completed = false;
+    }
+    saveTodo();
   });
 
   // Error message for no task input
