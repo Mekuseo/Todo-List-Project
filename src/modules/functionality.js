@@ -4,15 +4,19 @@ const input = document.querySelector('#new-task-input');
 const listContainer = document.querySelector('#tasks');
 const errorMessage = document.querySelector('.error-message');
 const form = document.getElementById('new-task-form');
+
 let taskStorage = [];
 let taskObject;
+
 const saveTodo = () => {
   const allTodos = JSON.stringify(taskStorage);
   localStorage.setItem('taskStorage', allTodos);
 };
+
 const getStoredTodos = () => {
   taskStorage = JSON.parse(localStorage.getItem('taskStorage'));
 };
+
 const createTask = () => {
   taskObject = {
     description: input.value,
@@ -23,9 +27,8 @@ const createTask = () => {
     taskStorage.push(taskObject);
     saveTodo();
   }
-  // taskStorage.push(taskObject);
-  // saveTodo();
 };
+
 export default function addEditRemoveTask(task) {
   // function for adding new task to the list
   const taskContainer = document.createElement('div');
@@ -58,6 +61,7 @@ export default function addEditRemoveTask(task) {
   taskContainer.appendChild(taskActionsContainer);
   listContainer.appendChild(taskContainer);
   input.value = '';
+
   taskEditButton.addEventListener('click', () => {
     if (taskEditButton.innerText.toLowerCase() === 'edit') {
       taskEditButton.innerText = 'Save';
@@ -74,10 +78,22 @@ export default function addEditRemoveTask(task) {
     listContainer.removeChild(taskContainer);
   });
 
+  // Remove the todo item from the list of todo items in local storage
+  taskDeleteButton.addEventListener('click', () => {
+    const taskIndex = taskStorage.indexOf(task);
+    taskStorage.splice(taskIndex, 1);
+    saveTodo();
+  });
+
   // delete all tasks from the list
   const deleteAllButton = document.querySelector('.delete-all');
   deleteAllButton.addEventListener('click', () => {
     listContainer.innerHTML = '';
+  });
+
+  // Remove all todo items from the list in local storage
+  deleteAllButton.addEventListener('click', () => {
+    localStorage.clear();
   });
 
   // Error message for no task input
@@ -114,4 +130,5 @@ const populateTasks = () => {
     listContainer.appendChild(taskInputContainer);
   }
 };
+
 export { populateTasks, formSubmission };
