@@ -27,6 +27,29 @@ export default function addEditRemoveTask() {
   taskContentContainer.appendChild(taskCheckboxContainer);
   taskContentContainer.appendChild(taskInputContainer);
 
+  // creating a local storage
+  const taskLists = [];
+  const taskObject = [
+    {
+      description: task,
+      completed: false,
+      index: taskLists.length + 1,
+    },
+  ];
+  taskLists.push(taskObject);
+
+  for (let i = 0; i < taskLists.length; i += 1) {
+    taskLists[i].index = i + 1;
+    let taskStorage;
+    if (localStorage.getItem('taskStorage') === null) {
+      taskStorage = [];
+    } else {
+      taskStorage = JSON.parse(localStorage.getItem('taskStorage'));
+    }
+    taskStorage.push(taskLists);
+    localStorage.setItem('taskStorage', JSON.stringify(taskStorage));
+  }
+
   // function for editing and removing task from the list
   const taskActionsContainer = document.createElement('div');
   taskActionsContainer.classList.add('actions');
@@ -45,7 +68,6 @@ export default function addEditRemoveTask() {
   taskContainer.appendChild(taskActionsContainer);
 
   listContainer.appendChild(taskContainer);
-
   input.value = '';
 
   taskEditButton.addEventListener('click', () => {

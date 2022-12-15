@@ -1,6 +1,6 @@
 :root {
   --dark: #000;
-  --darker: #fff;
+  --darker: rgb(182, 179, 179);
   --darkest: #111827;
   --grey: #6b7280;
   --pink: gold;
@@ -58,7 +58,7 @@ button {
   padding: 1rem;
   border-radius: 1rem;
   margin-right: 1rem;
-  color: var(--light);
+  color: gold;
   font-size: 1.25rem;
 }
 
