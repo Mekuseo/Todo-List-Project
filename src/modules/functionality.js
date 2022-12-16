@@ -1,7 +1,5 @@
 /* eslint-disable array-callback-return */
 
-import { removeAllTodo, deleteAllList } from './interactive.js';
-
 const input = document.querySelector('#new-task-input');
 const listContainer = document.querySelector('#tasks');
 const errorMessage = document.querySelector('.error-message');
@@ -29,6 +27,20 @@ const createTask = () => {
     taskStorage.push(taskObject);
     saveTodo();
   }
+};
+
+const updateIndexs = () => {
+  let index = 1;
+  taskStorage.forEach((task) => {
+    task.index = index;
+    index += 1;
+  });
+};
+
+const clearAll = () => {
+  taskStorage = taskStorage.filter((task) => !task.completed);
+  updateIndexs();
+  saveTodo();
 };
 
 export default function addEditRemoveTask(task) {
@@ -73,7 +85,7 @@ export default function addEditRemoveTask(task) {
       taskEditButton.innerText = 'Edit';
       taskInputContainer.setAttribute('readonly', 'readonly');
     }
-  
+
     // Update the todo item in local storage
     const taskIndex = taskStorage.indexOf(task);
     taskStorage[taskIndex].description = taskInputContainer.value;
@@ -89,22 +101,28 @@ export default function addEditRemoveTask(task) {
   taskDeleteButton.addEventListener('click', () => {
     const taskIndex = taskStorage.indexOf(task);
     taskStorage.splice(taskIndex, 1);
-    updateIndexs()
+    updateIndexs();
     saveTodo();
   });
 
   // delete all tasks from the list
-  deleteAllList();
+  const deleteAllButton = document.querySelector('.delete-all');
+  deleteAllButton.addEventListener('click', () => {
+    const deleteList = document.querySelectorAll('.completed');
+    deleteList.forEach((task) => {
+      task.remove();
+    });
+    clearAll();
+  });
 
   // Remove all todo items from the list in local storage
-  clearAll();
 
   // function for updating items object's value for completed
   taskCheckboxContainer.addEventListener('change', () => {
     if (taskCheckboxContainer.checked === true) {
       task.completed = true;
       taskContainer.classList.add('completed');
-      
+
       // Update the todo item in local storage
       const taskIndex = taskStorage.indexOf(task);
       taskStorage[taskIndex].completed = true;
@@ -140,21 +158,6 @@ function formSubmission() {
     addEditRemoveTask(taskObject);
   });
 }
-
-const updateIndexs = () => {
-  let index = 1;
-  taskStorage.forEach((task) => {
-    task.index = index;
-    index += 1;
-  });
-};
-
-const clearAll = () => {
-  taskStorage = taskStorage.filter((task) => !task.completed);
-  updateIndexs();
-  saveTodo();
-}
-
 
 const populateTasks = () => {
   if (localStorage.getItem('taskStorage') !== null) {
