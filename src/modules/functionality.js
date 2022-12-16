@@ -73,6 +73,11 @@ export default function addEditRemoveTask(task) {
       taskEditButton.innerText = 'Edit';
       taskInputContainer.setAttribute('readonly', 'readonly');
     }
+  
+    // Update the todo item in local storage
+    const taskIndex = taskStorage.indexOf(task);
+    taskStorage[taskIndex].description = taskInputContainer.value;
+    saveTodo();
   });
 
   // function for removing task from the list
@@ -84,6 +89,7 @@ export default function addEditRemoveTask(task) {
   taskDeleteButton.addEventListener('click', () => {
     const taskIndex = taskStorage.indexOf(task);
     taskStorage.splice(taskIndex, 1);
+    updateIndexs()
     saveTodo();
   });
 
@@ -97,11 +103,22 @@ export default function addEditRemoveTask(task) {
   taskCheckboxContainer.addEventListener('change', () => {
     if (taskCheckboxContainer.checked === true) {
       task.completed = true;
+      taskContainer.classList.add('completed');
+      
+      // Update the todo item in local storage
+      const taskIndex = taskStorage.indexOf(task);
+      taskStorage[taskIndex].completed = true;
     } else {
       task.completed = false;
+      taskContainer.classList.remove('completed');
+      localStorage.removeItem('taskStorage');
     }
     saveTodo();
   });
+
+  if (task.completed === true) {
+    taskCheckboxContainer.click();
+  }
 
   // Error message for no task input
   if (task.description === '') {
@@ -121,6 +138,14 @@ function formSubmission() {
     e.preventDefault();
     createTask();
     addEditRemoveTask(taskObject);
+  });
+}
+
+const updateIndexs = () => {
+  let index = 1;
+  taskStorage.forEach((task) => {
+    task.index = index;
+    index += 1;
   });
 }
 
