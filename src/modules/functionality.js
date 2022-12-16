@@ -29,6 +29,20 @@ const createTask = () => {
   }
 };
 
+const updateIndexs = () => {
+  let index = 1;
+  taskStorage.forEach((task) => {
+    task.index = index;
+    index += 1;
+  });
+};
+
+const clearAll = () => {
+  taskStorage = taskStorage.filter((task) => !task.completed);
+  updateIndexs();
+  saveTodo();
+};
+
 export default function addEditRemoveTask(task) {
   // function for adding new task to the list
   const taskContainer = document.createElement('div');
@@ -71,6 +85,11 @@ export default function addEditRemoveTask(task) {
       taskEditButton.innerText = 'Edit';
       taskInputContainer.setAttribute('readonly', 'readonly');
     }
+
+    // Update the todo item in local storage
+    const taskIndex = taskStorage.indexOf(task);
+    taskStorage[taskIndex].description = taskInputContainer.value;
+    saveTodo();
   });
 
   // function for removing task from the list
@@ -82,19 +101,42 @@ export default function addEditRemoveTask(task) {
   taskDeleteButton.addEventListener('click', () => {
     const taskIndex = taskStorage.indexOf(task);
     taskStorage.splice(taskIndex, 1);
+    updateIndexs();
     saveTodo();
   });
 
   // delete all tasks from the list
   const deleteAllButton = document.querySelector('.delete-all');
   deleteAllButton.addEventListener('click', () => {
-    listContainer.innerHTML = '';
+    const deleteList = document.querySelectorAll('.completed');
+    deleteList.forEach((task) => {
+      task.remove();
+    });
+    clearAll();
   });
 
   // Remove all todo items from the list in local storage
-  deleteAllButton.addEventListener('click', () => {
-    localStorage.clear();
+
+  // function for updating items object's value for completed
+  taskCheckboxContainer.addEventListener('change', () => {
+    if (taskCheckboxContainer.checked === true) {
+      task.completed = true;
+      taskContainer.classList.add('completed');
+
+      // Update the todo item in local storage
+      const taskIndex = taskStorage.indexOf(task);
+      taskStorage[taskIndex].completed = true;
+    } else {
+      task.completed = false;
+      taskContainer.classList.remove('completed');
+      localStorage.removeItem('taskStorage');
+    }
+    saveTodo();
   });
+
+  if (task.completed === true) {
+    taskCheckboxContainer.click();
+  }
 
   // Error message for no task input
   if (task.description === '') {
