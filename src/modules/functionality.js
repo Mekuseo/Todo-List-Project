@@ -97,7 +97,7 @@ export default function addEditRemoveTask(task) {
   deleteAllList();
 
   // Remove all todo items from the list in local storage
-  removeAllTodo();
+  clearAll();
 
   // function for updating items object's value for completed
   taskCheckboxContainer.addEventListener('change', () => {
@@ -147,7 +147,14 @@ const updateIndexs = () => {
     task.index = index;
     index += 1;
   });
+};
+
+const clearAll = () => {
+  taskStorage = taskStorage.filter((task) => !task.completed);
+  updateIndexs();
+  saveTodo();
 }
+
 
 const populateTasks = () => {
   if (localStorage.getItem('taskStorage') !== null) {

@@ -5,7 +5,7 @@ const listContainer = document.querySelector('#tasks');
 
 const removeAllTodo = () => {
   deleteAllButton.addEventListener('click', () => {
-    localStorage.clear();
+    // clearAll();
   });
 };
 
@@ -13,7 +13,10 @@ const removeAllTodo = () => {
 const deleteAllList = () => {
   const deleteAllButton = document.querySelector('.delete-all');
   deleteAllButton.addEventListener('click', () => {
-    listContainer.innerHTML = '';
+    const deleteList = document.querySelectorAll('.completed');
+    deleteList.forEach((task) => {
+      task.remove();
+    });
   });
 };
 
