@@ -41,6 +41,7 @@ header h1 {
 }
 
 .content {
+  position: relative;
   display: flex;
   gap: 10px;
 }
@@ -168,4 +169,18 @@ main {
 
 .task .actions .delete {
   color: crimson;
+}
+
+.checkbox-delete {
+  color: crimson;
+  text-align: left;
+  position: absolute;
+  font-size: 0.7rem;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.checkbox-delete:hover {
+  opacity: 0.8;
 }
