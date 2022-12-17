@@ -51,7 +51,7 @@
 
 > Add a link to your deployed project.
 
-- [Live Demo Link]()
+- [Live Demo Link]('https://mekuseo.github.io/Todo-List-Project/dist/')
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
