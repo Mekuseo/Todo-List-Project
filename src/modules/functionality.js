@@ -43,7 +43,7 @@ const clearAll = () => {
   saveTodo();
 };
 
-export default function addEditRemoveTask(task) {
+function addEditRemoveTask(task) {
   // function for adding new task to the list
   const taskContainer = document.createElement('div');
   taskContainer.classList.add('task');
@@ -165,12 +165,13 @@ const populateTasks = () => {
     taskStorage.map((task) => {
       addEditRemoveTask(task);
     });
-  } else {
-    const taskInputContainer = document.createElement('h3');
-    taskInputContainer.classList.add('text');
-    taskInputContainer.textContent = 'No available tasks!!';
-    listContainer.appendChild(taskInputContainer);
   }
+  // else {
+  //   const taskInputContainer = document.createElement('h3');
+  //   taskInputContainer.classList.add('text');
+  //   taskInputContainer.textContent = 'No available tasks!!';
+  //   listContainer.appendChild(taskInputContainer);
+  // }
 };
 
-export { populateTasks, formSubmission };
+module.exports = { populateTasks, formSubmission, addEditRemoveTask };
